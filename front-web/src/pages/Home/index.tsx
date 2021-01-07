@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
-import  main  from './../../assets/images/main.svg'
-import './styles.css'
+import Footer from './../../components/Footer/Footer';
+import  main  from './../../assets/images/main.svg';
+import './styles.css';
 
 function Home() {
     return (
+        <>
         <div className="home-container">
             <div className="home-content">
                 <div className="home-actions">
@@ -22,6 +24,8 @@ function Home() {
                 </div>
             </div>
         </div>
+        <Footer/>
+        </>
     )
 }
 
