@@ -1,9 +1,10 @@
-import './styles.css'
+import './styles.css';
+import StepsHeader from './../../components/StepsHeader/StepsHeader'
 
 function Orders() {
     return (
-        <div>
-            Pedidos
+        <div className="orders-container">
+            <StepsHeader/>
         </div>
     )
 }
