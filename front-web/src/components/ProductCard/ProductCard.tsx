@@ -1,17 +1,31 @@
-function ProductCard() {
+import { Product } from '../../pages/Orders/types';
+
+type Props = {
+    product: Product;
+}
+function formatPrice(price: number){
+    const formatter = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+        minimumFractionDigits: 2
+    });
+
+    return formatter.format(price);
+}
+function ProductCard({ product }:Props) {
     return (
         <div className="order-card-container">
             <h3 className="order-card-title">
-                Pizza
+                {product.name}
             </h3>
-            <img className="order-card-image" src="https://raw.githubusercontent.com/devsuperior/sds2/master/assets/pizza_bacon.jpg" alt="order-card-image"></img>
+            <img className="order-card-image" src={product.imageUri} alt="orders"></img>
             <h3 className="order-card-price">
-                R$ 35,90
+                {formatPrice(product.price)}
             </h3>
             <div className="order-card description">
                 <h3>Descrição</h3>
                 <p>
-                    Descrição Uma deliciosa combinação de Linguiça Calabresa, rodelas de cebolas frescas, azeitonas pretas, mussarela, polpa de tomate, orégano e massa especial.
+                    {product.description}
                 </p>
             </div>
         </div>
