@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import api from './../../services/api'
 import { Product } from './types';
-import StepsHeader from './../../components/StepsHeader/StepsHeader'
-import ProductsList from './../../components/ProductsList/ProductsList'
+import StepsHeader from './../../components/StepsHeader/StepsHeader';
+import ProductsList from './../../components/ProductsList/ProductsList';
+import OrderLocation from './../../components/OrderLocation/OrderLocation';
 import './styles.css';
 
 
@@ -20,6 +21,7 @@ function Orders() {
         <div className="orders-container">
             <StepsHeader/>
             <ProductsList products = { products } />
+            <OrderLocation/>
         </div>
     )
 };
