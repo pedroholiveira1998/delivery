@@ -7,7 +7,7 @@ function Navbar() {
             <img className = "logo" src={ logo } alt="logo"></img>
             <a href="/">Delivery</a>
         </nav>
-    )
+    );
 }
 
 export default Navbar;
