@@ -1,13 +1,14 @@
-import mapApi from './../../services/mapApi';
+import fetchLocalMapBox from './../../services/mapApi';
+import AsyncSelect from 'react-select/async';
 import { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import AsyncSelect from 'react-select/async';
-import fetchLocalMapBox from './../../services/mapApi';
+import { OrderLocationData } from '../../pages/Orders/types';
 
 const initialPosition = {
-    lat: 51.055,
-    lng: -0.09
+    lat: -15.7217175,
+    lng: -48.0774442
 }
+
 type Place = {
     label?: string;
     value?: string;
@@ -16,7 +17,12 @@ type Place = {
         lng: number;
     };
 }
-function OrderLocation() {
+
+type Props = {
+    onChangeLocation: (location: OrderLocationData) => void;
+}
+
+function OrderLocation({ onChangeLocation }: Props) {
     
     const [address, setAddress] = useState<Place>({
         position: initialPosition
@@ -33,7 +39,6 @@ function OrderLocation() {
               lat: item.center[1],
               lng: item.center[0]
             },
-            place: item.place_name,
           });
         });
       
@@ -42,11 +47,11 @@ function OrderLocation() {
       
       const handleChangeSelect = (place: Place) => {
         setAddress(place);
-        // onChangeLocation({
-        //   latitude: place.position.lat,
-        //   longitude: place.position.lng,
-        //   address: place.label!
-        // });
+        onChangeLocation({
+          latitude: place.position.lat,
+          longitude: place.position.lng,
+          address: place.label!
+        });
       };
 
 
@@ -62,14 +67,19 @@ function OrderLocation() {
                         onChange={value => handleChangeSelect(value as Place)}
                     />
                 </div>
-                <MapContainer center={address.position} zoom={13} scrollWheelZoom>
+                <MapContainer 
+                    center = {address.position} 
+                    zoom = {13}
+                    key = {address.position.lat} 
+                    scrollWheelZoom
+                >
                     <TileLayer
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
                     <Marker position={address.position}>
                         <Popup>
-                            A pretty CSS3 popup. <br /> Easily customizable.
+                            {address.label}
                         </Popup>
                     </Marker>
                 </MapContainer>
